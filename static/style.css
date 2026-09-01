@@ -1,0 +1,151 @@
+:root {
+  --green-dark: #2C5F2D;
+  --green-mid: #6DB33F;
+  --green-pale: #E7EFDD;
+  --green-paler: #F3F7EE;
+  --ink: #1D1D1B;
+  --body: #44483F;
+  --danger: #B3412C;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: -apple-system, "Segoe UI", Calibri, Roboto, sans-serif;
+  background: var(--green-paler);
+  color: var(--body);
+}
+
+.wrap {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 48px 24px 80px;
+}
+
+header .kicker {
+  color: var(--green-mid);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  font-size: 0.8rem;
+  margin: 0 0 8px;
+}
+
+header h1 {
+  color: var(--ink);
+  font-size: 2rem;
+  margin: 0 0 8px;
+}
+
+header .sub {
+  margin: 0 0 32px;
+  color: var(--body);
+}
+
+.card {
+  background: white;
+  border: 1px solid var(--green-pale);
+  border-radius: 14px;
+  padding: 28px;
+  margin-bottom: 24px;
+}
+
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px 20px;
+}
+
+.grid label {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 calc(50% - 10px);
+  min-width: 220px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--ink);
+  gap: 6px;
+}
+
+.grid label.span2 { flex-basis: 100%; }
+
+input, select {
+  font-size: 1rem;
+  padding: 10px 12px;
+  border: 1px solid #ccd6c4;
+  border-radius: 8px;
+  font-weight: 400;
+  color: var(--body);
+  background: var(--green-paler);
+}
+
+input:focus, select:focus {
+  outline: 2px solid var(--green-mid);
+  outline-offset: 1px;
+}
+
+button {
+  margin-top: 24px;
+  width: 100%;
+  padding: 14px;
+  font-size: 1rem;
+  font-weight: 700;
+  color: white;
+  background: var(--green-dark);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+button:hover { background: #244d25; }
+
+.result h2 {
+  margin-top: 0;
+  color: var(--ink);
+}
+
+.stat-row {
+  display: flex;
+  margin: 20px 0;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  margin-right: 48px;
+  padding-right: 48px;
+  border-right: 1px solid var(--green-pale);
+}
+
+.stat:last-child {
+  border-right: none;
+  margin-right: 0;
+  padding-right: 0;
+}
+
+.stat .big {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: var(--green-dark);
+}
+
+.stat .label {
+  font-size: 0.85rem;
+  color: var(--body);
+  margin-top: 4px;
+}
+
+.result.risk .stat:first-child .big { color: var(--danger); }
+
+.verdict {
+  border-top: 1px solid var(--green-pale);
+  padding-top: 16px;
+  font-size: 1rem;
+}
+
+footer {
+  text-align: center;
+  font-size: 0.8rem;
+  color: #8a8f80;
+  margin-top: 32px;
+}

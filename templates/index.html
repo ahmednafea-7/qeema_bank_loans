@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QeemaBank · Loan Risk Estimator</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <main class="wrap">
+    <header>
+      <p class="kicker">QEEMA CAPSTONE · ML DEMO</p>
+      <h1>Loan Risk Estimator</h1>
+      <p class="sub">Enter an applicant's profile to get a default-risk prediction and a suggested loan amount.</p>
+    </header>
+
+    <form method="post" class="card">
+      <div class="grid">
+        <label>Gender
+          <select name="gender" required>
+            {% for g in genders %}
+              <option value="{{ g }}" {% if form and form.gender == g %}selected{% endif %}>{{ g }}</option>
+            {% endfor %}
+          </select>
+        </label>
+
+        <label>Age
+          <input type="number" name="age" min="18" max="100" step="1" required
+                 value="{{ form.age if form else 30 }}">
+        </label>
+
+        <label>Annual income ($)
+          <input type="number" name="annual_income" min="0" step="100" required
+                 value="{{ form.annual_income if form else 60000 }}">
+        </label>
+
+        <label>Years employed
+          <input type="number" name="employment_years" min="0" step="0.5" required
+                 value="{{ form.employment_years if form else 5 }}">
+        </label>
+
+        <label>Education
+          <select name="education" required>
+            {% for e in educations %}
+              <option value="{{ e }}" {% if form and form.education == e %}selected{% endif %}>{{ e }}</option>
+            {% endfor %}
+          </select>
+        </label>
+
+        <label>Credit score
+          <input type="number" name="credit_score" min="300" max="850" step="1" required
+                 value="{{ form.credit_score if form else 680 }}">
+        </label>
+
+        <label>Debt-to-income ratio (0–1)
+          <input type="number" name="debt_to_income" min="0" max="2" step="0.01" required
+                 value="{{ form.debt_to_income if form else 0.30 }}">
+        </label>
+
+        <label>Existing loans
+          <input type="number" name="num_existing_loans" min="0" step="1" required
+                 value="{{ form.num_existing_loans if form else 1 }}">
+        </label>
+
+        <label class="span2">Loan purpose
+          <select name="loan_purpose" required>
+            {% for p in purposes %}
+              <option value="{{ p }}" {% if form and form.loan_purpose == p %}selected{% endif %}>{{ p }}</option>
+            {% endfor %}
+          </select>
+        </label>
+      </div>
+
+      <button type="submit">Get prediction</button>
+    </form>
+
+    {% if result %}
+    <section class="card result {{ 'safe' if 'repay' in result.default_prediction.lower() else 'risk' }}">
+      <h2>Result</h2>
+      <div class="stat-row">
+        <div class="stat">
+          <span class="big">{{ result.default_probability }}%</span>
+          <span class="label">probability of default</span>
+        </div>
+        <div class="stat">
+          <span class="big">${{ "{:,.0f}".format(result.suggested_loan_amount) }}</span>
+          <span class="label">suggested loan amount</span>
+        </div>
+      </div>
+      <p class="verdict"><strong>{{ result.default_prediction }}.</strong> {{ result.recommendation }}</p>
+    </section>
+    {% endif %}
+
+    <footer>
+      <p>Educational demo — not a real underwriting decision. Model trained on synthetic QeemaBank data.</p>
+    </footer>
+  </main>
+</body>
+</html>
